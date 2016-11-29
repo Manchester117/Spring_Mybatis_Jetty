@@ -12,16 +12,28 @@
     <sql id="Base_Column_List">
         view_id, user_number, view_name, view_time, view_photo, view_desc
     </sql>
+
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from view_info
         where view_id = #{viewId,jdbcType=INTEGER}
     </select>
+
+    <select id="getViewList" parameterType="com.ssm.po.ViewInfo" resultMap="BaseResultMap">
+        select * from view_info
+        <where>
+            <if test="viewName!=null and viewName!=''">
+                and view_Name like #{viewName,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
         delete from view_info
         where view_id = #{viewId,jdbcType=INTEGER}
     </delete>
+
     <insert id="insert" parameterType="com.ssm.po.ViewInfo">
         insert into view_info (view_id, user_number, view_name,
         view_time, view_photo, view_desc
@@ -30,6 +42,7 @@
         #{viewTime,jdbcType=TIMESTAMP}, #{viewPhoto,jdbcType=VARCHAR}, #{viewDesc,jdbcType=VARCHAR}
         )
     </insert>
+
     <insert id="insertSelective" parameterType="com.ssm.po.ViewInfo">
         insert into view_info
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -73,6 +86,7 @@
             </if>
         </trim>
     </insert>
+
     <update id="updateByPrimaryKeySelective" parameterType="com.ssm.po.ViewInfo">
         update view_info
         <set>
@@ -94,6 +108,7 @@
         </set>
         where view_id = #{viewId,jdbcType=INTEGER}
     </update>
+
     <update id="updateByPrimaryKey" parameterType="com.ssm.po.ViewInfo">
         update view_info
         set user_number = #{userNumber,jdbcType=VARCHAR},

@@ -22,8 +22,8 @@ public class UserInfoController {
 
     @RequestMapping("/getUserList")
     public String getUserList(UserInfo user, Model model) {
-        List<UserInfo> list = userInfoService.getUserList(user);
-        model.addAttribute("list", list);
+        List<UserInfo> userInfolist = userInfoService.getUserList(user);
+        model.addAttribute("list", userInfolist);
 
         return "jsp/admin/user_info/user_list";
     }

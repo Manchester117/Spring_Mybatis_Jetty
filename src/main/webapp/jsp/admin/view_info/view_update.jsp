@@ -12,14 +12,17 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>用户添加</title>
+    <title>景区添加</title>
     <link rel="stylesheet" href="../../../resources/bootstrap/dist/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="../../../resources/css/dashboard.css"/>
+    <link ref="stylesheet" href="../../../resources/css/fileinput.css"/>
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-    <script src="../../../resources/js/html5shiv.min.js"></script>
-    <script src="../../../resources/js/respond.min.js"></script>
+    <script type=text/javascript src="../../../resources/js/html5shiv.min.js"></script>
+    <script type=text/javascript src="../../../resources/js/respond.min.js"></script>
+    <script type=text/javascript src="../../../resources/js/fileinput.js"></script>
+    <script type=text/javascript src="../../../resources/js/zh.js"></script>
     <![endif]-->
 </head>
 <body>
@@ -36,10 +39,10 @@
     </div>
 </nav>
 
+
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
-
             <h4>菜单栏</h4>
             <ul class="nav nav-sidebar">
                 <%--<li><a href="#">Overview <span class="sr-only">(current)</span></a></li>--%>
@@ -50,42 +53,40 @@
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <h2 class="sub-header">Add Or Edit</h2>
 
-            <form action="<c:url value="/user_info/add"/>" method="post" class="form-horizontal">
+            <form action="<c:url value='/view_info/update'/>" method="post" enctype="multipart/form-data" class="form-horizontal">
+                <input type="hidden" name="viewId" value="${viewInfo.viewId}"/>
+
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">用户账号</label>
+                    <label class="col-sm-2 control-label">景区名称:</label>
                     <div class="col-sm-10">
-                        <input type="text" name="userNumber" class="form-control">
+                        <input type="text" name="viewName" class="form-control" value="${viewInfo.viewName}">
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">用户密码</label>
-                    <div class="col-sm-10">
-                        <input type="text" name="userPw" class="form-control">
+                    <label class="col-sm-2 control-label">景区图片:</label>
+                    <div class=col-sm-10">
+                        <img alt="" src="<c:url value="/upload/${viewInfo.viewPhoto}"/>" width="100px" height="100px"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">上传图片:</label>
+                    <div class=col-sm-10">
+                        <input name="file" type="file" class="file-preview-image">
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">用户姓名</label>
+                    <label class="col-sm-2 control-label">景区详情:</label>
                     <div class="col-sm-10">
-                        <input type="text" name="userName" class="form-control">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">用户类型</label>
-                    <div class="col-sm-10">
-                        <select name="userType" class="form-control">
-                            <option>管理员</option>
-                            <option>普通用户</option>
-                        </select>
+                        <textarea class="form-control" name="viewDesc" rows="5">${viewInfo.viewDesc}</textarea>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                        <button type="submit" class="btn btn-default">保存用户</button>
-                        <button type="submit" class="btn btn-default">重置信息</button>
+                        <button type="submit" class="btn btn-primary">提交</button>
+                        <button type="button" class="btn btn-default">重置</button>
                     </div>
                 </div>
             </form>

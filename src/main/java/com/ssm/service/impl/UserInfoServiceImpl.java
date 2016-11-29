@@ -13,6 +13,7 @@ import java.util.List;
  */
 @Service(value = "userInfoServiceImpl")
 public class UserInfoServiceImpl implements UserInfoService{
+
     @Resource(name = "userInfoMapper")
     private UserInfoMapper userInfoMapper;
 

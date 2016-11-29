@@ -20,10 +20,10 @@
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
-            <span class="navbar-brand logo"><a href="../index.jsp">卓聘API容器内管系统</a></span>
+            <span class="navbar-brand logo"><a href="<c:url value="/user_info/getUserList"/>">SpringMVC + Mybatis + Jetty</a></span>
         </div>
         <div class="navbar-collapse collapse">
-            <a class="navbar-brand navbar-right" href="/jsp/admin/login.jsp">退出</a>
+            <a class="navbar-brand navbar-right" href="<c:url value="/jsp/admin/login.jsp"/>">退出</a>
             <span class="navbar-brand navbar-right">管理员</span>
         </div>
     </div>
@@ -36,7 +36,7 @@
             <h4>菜单栏</h4>
             <ul class="nav nav-sidebar">
                 <li><a href="#">用户管理</a></li>
-                <li><a href="/jsp/admin/view_info/view_list.jsp">景区管理</a></li>
+                <li><a href="<c:url value="/view_info/getViewList"/>">景区管理</a></li>
             </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">

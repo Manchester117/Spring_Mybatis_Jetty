@@ -1,5 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="d" uri="http://displaytag.sf.net" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
     <meta charset="utf-8">
@@ -20,10 +22,10 @@
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
-            <span class="navbar-brand logo"><a href="../index.jsp">卓聘API容器内管系统</a></span>
+            <span class="navbar-brand logo"><a href="<c:url value="/user_info/getUserList"/>">SpringMVC + Mybatis + Jetty</a></span>
         </div>
         <div class="navbar-collapse collapse">
-            <a class="navbar-brand navbar-right" href="../login.jsp">退出</a>
+            <a class="navbar-brand navbar-right" href="<c:url value="/jsp/admin/login.jsp"/>">退出</a>
             <span class="navbar-brand navbar-right">管理员</span>
         </div>
     </div>
@@ -35,129 +37,42 @@
         <div class="col-sm-3 col-md-2 sidebar">
             <h4>菜单栏</h4>
             <ul class="nav nav-sidebar">
-                <li><a href="../user_info/user_list.jsp">用户管理</a></li>
+                <li><a href="<c:url value="/user_info/getUserList"/>">用户管理</a></li>
                 <li><a href="#">景区管理</a></li>
             </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <h2 class="sub-header">景区管理</h2>
-
-            <form class="form-inline">
+            <form action="<c:url value="/view_info/getViewList"/>" method="post" class="form-inline">
                 <div class="form-group">
-                    <label>ID</label>
-                    <input type="text" class="form-control">
+                    <label>景区名称</label>
+                    <input type="text" name="viewName" class="form-control">
                 </div>
-                <div class="form-group">
-                    <label>name</label>
-                    <input type="email" class="form-control">
-                </div>
-
-                <div class="form-group">
-                    <label>Select</label>
-                    <select class="form-control">
-                        <option>option 1</option>
-                        <option>option 2</option>
-                        <option>option 3</option>
-                        <option>option 4</option>
-                        <option>option 5</option>
-                    </select>
-                </div>
-
-                <button type="submit" class="btn btn-default">搜索</button>
+                <button type="submit" class="btn btn-default" >搜索</button>
+                <button type="button" class="btn btn-primary" onclick="window.location.href='/jsp/admin/view_info/view_add.jsp'">添加</button>
             </form>
 
-            <h3>
-                <button type="button" class="btn btn-primary" onclick="window.location.href='view_add.jsp'">添加</button>
-            </h3>
-            <div class="table-responsive">
-                <table class="table table-striped">
-                    <thead>
+            <table class="table table-striped">
+                <th>景区编号</th>
+                <th>景区名称</th>
+                <th>景区图片</th>
+                <th>创建时间</th>
+                <th>操作</th>
+                <c:forEach items="${list}" var="view">
                     <tr>
-                        <th>ID</th>
-                        <th>Header</th>
-                        <th>Header</th>
-                        <th>Header</th>
-                        <th>Header</th>
-                        <th>Header</th>
-                        <th>操作</th>
+                        <td>${view.viewId}</td>
+                        <td>${view.viewName}</td>
+                        <%--如果要访问图片则需要使用<c:url value="/">标签来设定图片的url--%>
+                        <td><img alt="" src="<c:url value="/upload/${view.viewPhoto}"/>" width="50" height="50"/></td>
+                        <td><fmt:formatDate value="${view.viewTime}" type="both"/></td>
+                        <td>
+                            <a href="<c:url value="/view_info/update_page?viewId=${view.viewId}"/>">修改</a>
+                            <%-- 使用JS的方式避免重复提交--%>
+                            <a href="javascript:window.location.href='/view_info/delete?viewId=${view.viewId}'">删除</a>
+                        </td>
                     </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>1,001</td>
-                        <td><a href="#">Lorem</a></td>
-                        <td>ipsum</td>
-                        <td>dolor</td>
-                        <td>sit</td>
-                        <td>dolor</td>
-                        <td><i class="glyphicon glyphicon-edit icons" title="修改"></i><i class="glyphicon glyphicon-remove icons" title="删除"></i></td>
-                    </tr>
-                    <tr>
-                        <td>1,001</td>
-                        <td><a href="#">Lorem</a></td>
-                        <td>ipsum</td>
-                        <td>dolor</td>
-                        <td>sit</td>
-                        <td>dolor</td>
-                        <td><i class="glyphicon glyphicon-edit icons" title="修改"></i><i class="glyphicon glyphicon-remove icons" title="删除"></i></td>
-                    </tr>
-                    <tr>
-                        <td>1,001</td>
-                        <td><a href="#">Lorem</a></td>
-                        <td>ipsum</td>
-                        <td>dolor</td>
-                        <td>sit</td>
-                        <td>dolor</td>
-                        <td><i class="glyphicon glyphicon-edit icons" title="修改"></i><i class="glyphicon glyphicon-remove icons" title="删除"></i></td>
-                    </tr>
-                    <tr>
-                        <td>1,001</td>
-                        <td><a href="#">Lorem</a></td>
-                        <td>ipsum</td>
-                        <td>dolor</td>
-                        <td>sit</td>
-                        <td>dolor</td>
-                        <td><i class="glyphicon glyphicon-edit icons" title="修改"></i><i class="glyphicon glyphicon-remove icons" title="删除"></i></td>
-                    </tr>
-                    <tr>
-                        <td>1,001</td>
-                        <td><a href="#">Lorem</a></td>
-                        <td>ipsum</td>
-                        <td>dolor</td>
-                        <td>sit</td>
-                        <td>dolor</td>
-                        <td><i class="glyphicon glyphicon-edit icons" title="修改"></i><i class="glyphicon glyphicon-remove icons" title="删除"></i></td>
-                    </tr>
-                    <tr>
-                        <td>1,001</td>
-                        <td><a href="#">Lorem</a></td>
-                        <td>ipsum</td>
-                        <td>dolor</td>
-                        <td>sit</td>
-                        <td>dolor</td>
-                        <td><i class="glyphicon glyphicon-edit icons" title="修改"></i><i class="glyphicon glyphicon-remove icons" title="删除"></i></td>
-                    </tr>
-                    <tr>
-                        <td>1,001</td>
-                        <td><a href="#">Lorem</a></td>
-                        <td>ipsum</td>
-                        <td>dolor</td>
-                        <td>sit</td>
-                        <td>dolor</td>
-                        <td><i class="glyphicon glyphicon-edit icons" title="修改"></i><i class="glyphicon glyphicon-remove icons" title="删除"></i></td>
-                    </tr>
-                    <tr>
-                        <td>1,001</td>
-                        <td><a href="#">Lorem</a></td>
-                        <td>ipsum</td>
-                        <td>dolor</td>
-                        <td>sit</td>
-                        <td>dolor</td>
-                        <td><i class="glyphicon glyphicon-edit icons" title="修改"></i><i class="glyphicon glyphicon-remove icons" title="删除"></i></td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
+                </c:forEach>
+            </table>
 
             <!--分页-->
             <ul class="pagination pull-right">

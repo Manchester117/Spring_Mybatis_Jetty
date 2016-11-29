@@ -26,7 +26,7 @@
 
 <div class="container">
     <form action="<c:url value="/user_info/login"/>" method="post" class="form-signin">
-        <h2 class="form-signin-heading">卓聘API容器内管系统</h2>
+        <h2 class="form-signin-heading">SpringMVC + Mybatis</h2>
         <h5 class="form-signin-heading" align="center">${info == null ? "请输入账号和密码" : info}</h5>
         <label for="userPw" class="sr-only">用户名</label>
         <input type="text" id="userNumber" name="userNumber" class="form-control" placeholder="用户名" autofocus=""/>

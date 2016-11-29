@@ -62,4 +62,16 @@ public class ViewInfo {
     public void setViewDesc(String viewDesc) {
         this.viewDesc = viewDesc == null ? null : viewDesc.trim();
     }
+
+    @Override
+    public String toString() {
+        return "ViewInfo{" +
+                "viewId=" + viewId +
+                ", userNumber='" + userNumber + '\'' +
+                ", viewName='" + viewName + '\'' +
+                ", viewTime=" + viewTime +
+                ", viewPhoto='" + viewPhoto + '\'' +
+                ", viewDesc='" + viewDesc + '\'' +
+                '}';
+    }
 }
