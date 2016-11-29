@@ -3,7 +3,6 @@ package com.ssm.controller;
 import com.ssm.po.UserInfo;
 import com.ssm.po.ViewInfo;
 import com.ssm.service.ViewInfoService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
