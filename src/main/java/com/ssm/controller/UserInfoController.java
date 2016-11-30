@@ -22,8 +22,8 @@ public class UserInfoController {
 
     @RequestMapping("/getUserList")
     public String getUserList(UserInfo user, Model model) {
-        List<UserInfo> userInfolist = userInfoService.getUserList(user);
-        model.addAttribute("list", userInfolist);
+        List<UserInfo> userInfoList = userInfoService.getUserList(user);
+        model.addAttribute("list", userInfoList);
 
         return "jsp/admin/user_info/user_list";
     }
@@ -95,7 +95,7 @@ public class UserInfoController {
     public String login(String userNumber, String userPw, Model model, HttpSession session) {
         if (userNumber != null && !userNumber.equals("")) {
             UserInfo user = userInfoService.getUser(userNumber);
-            if (user != null && user.getUserPw().equals(userPw)) {
+            if (user != null && user.getUserPw().equals(userPw) && "管理员".equals(user.getUserType())) {
                 session.setAttribute("userInfo", user);
                 List<UserInfo> list = userInfoService.getUserList(null);
                 model.addAttribute("list", list);
